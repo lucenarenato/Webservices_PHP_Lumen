@@ -1,0 +1,108 @@
+This XML file does not appear to have any style information associated with it. The document tree is shown below.
+<wsdl:definitions xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://www.tcu.gov.br/servicos/debito/wsdl" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://www.tcu.gov.br/servicos/debito/wsdl">
+<wsdl:types>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://www.tcu.gov.br/servicos/debito/wsdl" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://www.tcu.gov.br/servicos/debito/wsdl">
+<xsd:element name="infoParaCalculoDebito">
+<xsd:complexType>
+<xsd:all>
+<xsd:element name="parcelas">
+<xsd:complexType>
+<xsd:sequence>
+<xsd:element maxOccurs="unbounded" name="parcela">
+<xsd:complexType>
+<xsd:all>
+<xsd:element name="data" type="xsd:date">
+<xsd:annotation>
+<xsd:documentation>
+Formato esperado: YYYY-MM-DD, onde Y indica ano, M indica mês e D indica dia.
+</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="valor" type="xsd:double">
+<xsd:annotation>
+<xsd:documentation>
+O valor pode ser indicado no formato inteiro, ou utilizando o separador "." para indicar valor decimal.
+</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="tipo">
+<xsd:annotation>
+<xsd:documentation>"C" indica Crédito. "D" indica Débito. </xsd:documentation>
+</xsd:annotation>
+<xsd:simpleType>
+<xsd:restriction base="xsd:string">
+<xsd:enumeration value="C"/>
+<xsd:enumeration value="D"/>
+</xsd:restriction>
+</xsd:simpleType>
+</xsd:element>
+</xsd:all>
+</xsd:complexType>
+</xsd:element>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="aplicaJuros" type="xsd:boolean">
+<xsd:annotation>
+<xsd:documentation>
+"true" caso devam ser aplicados juros no cálculo, "false" caso contrário.
+</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+<xsd:element name="dataAtualizacao" type="xsd:date">
+<xsd:annotation>
+<xsd:documentation>
+Formato esperado: YYYY-MM-DD, onde Y indica ano, M indica mês e D indica dia.
+</xsd:documentation>
+</xsd:annotation>
+</xsd:element>
+</xsd:all>
+</xsd:complexType>
+</xsd:element>
+<xsd:element name="saldoAtualizado" type="xsd:double"/>
+<xsd:element name="ExcecaoNegocioSoap" type="xsd:string"/>
+</xsd:schema>
+</wsdl:types>
+<wsdl:message name="obterSaldoAtualizadoRequest">
+<wsdl:part element="tns:infoParaCalculoDebito" name="infoParaCalculoDebito"> </wsdl:part>
+</wsdl:message>
+<wsdl:message name="obterSaldoAtualizadoResponse">
+<wsdl:part element="tns:saldoAtualizado" name="saldoAtualizado"> </wsdl:part>
+</wsdl:message>
+<wsdl:message name="ExcecaoNegocioSoap">
+<wsdl:part element="tns:ExcecaoNegocioSoap" name="fault"> </wsdl:part>
+</wsdl:message>
+<wsdl:portType name="CalculoDebito">
+<wsdl:operation name="obterSaldoAtualizado">
+<wsdl:input message="tns:obterSaldoAtualizadoRequest"> </wsdl:input>
+<wsdl:output message="tns:obterSaldoAtualizadoResponse"> </wsdl:output>
+<wsdl:fault message="tns:ExcecaoNegocioSoap" name="ExcecaoNegocioSoap"> </wsdl:fault>
+</wsdl:operation>
+</wsdl:portType>
+<wsdl:binding name="CalculoDebito" type="tns:CalculoDebito">
+<soap12:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+<wsdl:operation name="obterSaldoAtualizado">
+<wsdl:documentation>
+Operação que retorna o saldo do débito a partir de um conjunto de parcelas, data de atualização e informação a respeito do uso ou não de juros.
+</wsdl:documentation>
+<soap12:operation soapAction="http://www.tcu.gov.br/servicos/debito/CalculoDebito/obterSaldoAtualizado"/>
+<wsdl:input>
+<soap12:body use="literal"/>
+</wsdl:input>
+<wsdl:output>
+<soap12:body use="literal"/>
+</wsdl:output>
+<wsdl:fault name="ExcecaoNegocioSoap">
+<soap12:fault name="ExcecaoNegocioSoap" use="literal"/>
+</wsdl:fault>
+</wsdl:operation>
+</wsdl:binding>
+<wsdl:service name="CalculoDebito">
+<wsdl:documentation>
+Este serviço permite que se obtenha saldo relativo a atualização de parcelas de débito/crédito. Para mais informações a respeito da metodologia de cálculo utilizada, consulte o link http://portal2.tcu.gov.br/portal/page/portal/TCU/debito.
+</wsdl:documentation>
+<wsdl:port binding="tns:CalculoDebito" name="CalculoDebitoSOAP">
+<soap12:address location="http://contas.tcu.gov.br/debito/CalculoDebito"/>
+</wsdl:port>
+</wsdl:service>
+</wsdl:definitions>
