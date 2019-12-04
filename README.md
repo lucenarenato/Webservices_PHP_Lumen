@@ -3,18 +3,20 @@
 
 - https://www.php.net/manual/pt_BR/book.soap.php
 - https://framework.zend.com/manual/2.0/en/modules/zend.soap.server.html
-// Simple Object Access Protocol - SOAP
-// Web Services Description Language - WSDL
-// Chamada remota de procedimento - RPC
-
+- // Simple Object Access Protocol - SOAP
+- // Web Services Description Language - WSDL
+- // Chamada remota de procedimento - RPC
+```
 $ composer require zendframework/zend-soap
+```
+- Install
 
-
-sudo apt-get install php7.2-soap
-sudo apt-get install php7.2-intl
-grep -r "soap.dll" /etc/php/7.2/cli/
-php -i | grep -i soap
-
+```sh
+    sudo apt-get install php7.2-soap
+    sudo apt-get install php7.2-intl
+    grep -r "soap.dll" /etc/php/7.2/cli/
+    php -i | grep -i soap
+```
 resposta:
 ```sh
 	/etc/php/7.2/cli/conf.d/20-soap.ini,
