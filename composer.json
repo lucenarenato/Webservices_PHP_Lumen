@@ -5,11 +5,18 @@
     "license": "MIT",
     "type": "project",
     "require": {
-        "php": ">=5.5.9",
+        "php": ">=5.6.4",
         "laravel/lumen-framework": "5.2.*",
         "vlucas/phpdotenv": "~2.2",
         "zendframework/zend-config": "^2.6",
-        "zendframework/zend-soap": "^2.6"
+        "zendframework/zend-soap": "^2.6",
+        "spatie/array-to-xml": "~2.7",
+        "artisaninweb/laravel-soap": "0.3.0.9",
+        "guzzlehttp/guzzle": "^6.3",
+        "nb/oxymel": "^0.1.0",
+        "ext-soap": "*",
+        "ext-curl": "*",
+        "psr/log": "~1.1"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

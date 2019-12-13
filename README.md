@@ -1,3 +1,7 @@
+# Aprendendo Consumir API Webservice SOAP
+## Lumen - Laravel
+
+## Testes.
 
 ## Installation
 
@@ -8,10 +12,14 @@
 - // Chamada remota de procedimento - RPC
 ```
 $ composer require zendframework/zend-soap
+$ composer require artisaninweb/laravel-soap
+$ composer require nesbot/carbon
+$ composer require nb/oxymel
 ```
 - Install
 
 ```sh
+	sudo apt-get install libxml php7.2-soap
     sudo apt-get install php7.2-soap
     sudo apt-get install php7.2-intl
     grep -r "soap.dll" /etc/php/7.2/cli/
@@ -30,8 +38,14 @@ resposta:
 	soap.wsdl_cache_ttl => 86400 => 86400
 
 ```
+  "guzzlehttp/guzzle": "^6.3",
+  "kylekatarnls/laravel-carbon-2": "^1.0.0",
+  "nesbot/carbon": "2.0.0"
+
+
 - https://portal.tcu.gov.br/webservices-tcu/principal.htm
 - https://portal.tcu.gov.br/webservices-tcu/
+- https://github.com/briannesbitt/Carbon
 - Renato de Oliveira Lucena - 04/12/2019
 
 Esse código foi utilizado para a criação do curso [Webservices com PHP](https://www.schoolofnet.com/curso/php/linguagem-php/webservices-com-php/) da School of Net.
@@ -45,6 +59,57 @@ Blog da School of Net - [https://blog.schoolofnet.com](https://blog.schoolofnet.
 SONCast - Podcast da School of Net - [https://podcast.schoolofnet.com](https://podcast.schoolofnet.com)
 
 Canal da School of Net no Youtube: [http://www.youtube.com/c/SchoolofNetCursos](http://www.youtube.com/c/SchoolofNetCursos)
+
+oxymel – a sweet XML builder [![Build Status](https://travis-ci.org/nb/oxymel.png)](https://travis-ci.org/nb/oxymel)
+============================
+
+```php
+$oxymel = new Oxymel;
+echo $oxymel
+  ->xml
+  ->html->contains
+    ->head->contains
+      ->meta(array('charset' => 'utf-8'))
+      ->title("How to seduce dragons")
+    ->end
+    ->body(array('class' => 'story'))->contains
+      ->h1('How to seduce dragons', array('id' => 'begin'))
+      ->h2('The fire manual')
+      ->p('Once upon a time in a distant land there was an dragon.')
+      ->p('In another very distant land')->contains
+        ->text(' there was a very ')->strong('strong')->text(' warrrior')
+      ->end
+      ->p->contains->cdata('<b>who fought bold dragons</b>')->end
+      ->raw('<p>with not fake <b>bold</b> dragons, too</p>')
+      ->tag('dragon:identity', array('name' => 'Jake'))
+      ->comment('no dragons were harmed during the generation of this XML document')
+    ->end
+  ->end
+  ->to_string();
+```
+
+Outputs:
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<html>
+  <head>
+    <meta charset="utf-8"/>
+    <title>How to seduce dragons</title>
+  </head>
+  <body class="story">
+    <h1 id="begin">How to seduce dragons</h1>
+    <h2>The fire manual</h2>
+    <p>Once upon a time in a distant land there was an dragon.</p>
+    <p>In another very distant land there was a very <strong>strong</strong> warrrior</p>
+    <p><![CDATA[<b>who fought bold dragons</b>]]></p>
+    <p>with not fake <b>bold</b> dragons, too</p>
+    <dragon:identity name="Jake"/>
+    <!--no dragons were harmed during the generation of this XML document-->
+  </body>
+</html>
+```
+
 
 ## Lumen PHP Framework
 
@@ -67,3 +132,7 @@ If you discover a security vulnerability within Laravel, please send an e-mail t
 ### License
 
 The Lumen framework is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT)
+
+
+### Aluno
+- Renato Lucena 12/2019

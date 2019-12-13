@@ -81,6 +81,11 @@ $app->singleton(
 // $app->register(App\Providers\AppServiceProvider::class);
 // $app->register(App\Providers\AuthServiceProvider::class);
 // $app->register(App\Providers\EventServiceProvider::class);
+$app->register(Artisaninweb\SoapWrapper\ServiceProvider::class);
+
+//class_alias(Artisaninweb\SoapWrapper\Facade\SoapWrapper::class, 'SoapWrapper');
+class_alias('Artisaninweb\SoapWrapper\Facade', 'SoapWrapper');
+
 
 /*
 |--------------------------------------------------------------------------
